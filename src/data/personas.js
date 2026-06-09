@@ -81,6 +81,7 @@ export const personas = [
     role: 'user',
     description: 'Procurement, engineering, founders — fast discovery, RFQ/order, reorder, account control.',
     modules: ['Orders', 'Dashboard', 'Notifications'],
+    excludedNavIds: ['inventory'],
     icon: 'ShoppingCart',
     color: '#3b82f6',
   },

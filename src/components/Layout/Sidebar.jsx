@@ -1,20 +1,27 @@
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import {
   LayoutDashboard, Boxes, Truck, FileText, Shield, Network, Plug, Bell,
 } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
-import { navItems, roleLabels } from '../../data/navigation';
+import { getNavSections, getNavDescription, roleLabels } from '../../data/navigation';
 
 const iconMap = {
   LayoutDashboard, Boxes, Truck, FileText, Shield, Network, Plug, Bell,
 };
 
 export default function Sidebar() {
+  const navigate = useNavigate();
   const { currentUser, logout } = useAuth();
-
-  const visibleNav = navItems.filter((item) =>
-    item.roles.includes(currentUser?.role)
+  const sections = getNavSections(
+    currentUser?.modules,
+    currentUser?.id,
+    currentUser?.excludedNavIds
   );
+
+  const goToLanding = () => {
+    logout();
+    navigate('/');
+  };
 
   const renderNavSection = (label, items) => {
     if (!items.length) return null;
@@ -32,7 +39,7 @@ export default function Sidebar() {
               <span className="nav-item-icon"><Icon size={18} /></span>
               <span className="nav-item-text">
                 <span className="nav-item-label">{item.label}</span>
-                <span className="nav-item-desc">{item.description}</span>
+                <span className="nav-item-desc">{getNavDescription(item, currentUser?.id)}</span>
               </span>
             </NavLink>
           );
@@ -41,40 +48,12 @@ export default function Sidebar() {
     );
   };
 
-  const getNavSections = () => {
-    if (currentUser?.role === 'admin') {
-      return (
-        <>
-          {renderNavSection('Administrator', visibleNav.filter((i) =>
-            ['dashboard', 'iam', 'architecture', 'integrations'].includes(i.id)
-          ))}
-          {renderNavSection('Operations & Commerce', visibleNav.filter((i) =>
-            ['inventory', 'logistics', 'orders', 'notifications'].includes(i.id)
-          ))}
-        </>
-      );
-    }
-    if (currentUser?.role === 'dept_head') {
-      return (
-        <>
-          {renderNavSection(`${currentUser.dept || 'Department'} Head`, visibleNav.filter((i) =>
-            ['dashboard', 'inventory', 'logistics', 'orders'].includes(i.id)
-          ))}
-          {renderNavSection('Platform & Intelligence', visibleNav.filter((i) =>
-            ['architecture', 'integrations', 'notifications'].includes(i.id)
-          ))}
-        </>
-      );
-    }
-    return renderNavSection('My Workspace', visibleNav);
-  };
-
   return (
     <aside className="sidebar">
-      <div className="sidebar-brand">
+      <button type="button" className="sidebar-brand" onClick={goToLanding} aria-label="Go to landing page">
         <h1>Millennium Digital</h1>
         <p>Semiconductor Supply Platform</p>
-      </div>
+      </button>
 
       <div className="sidebar-user">
         <div className="sidebar-user-name">{currentUser?.name}</div>
@@ -84,7 +63,13 @@ export default function Sidebar() {
         </div>
       </div>
 
-      <nav className="sidebar-nav">{getNavSections()}</nav>
+      <nav className="sidebar-nav">
+        {sections.map((section) => (
+          <div key={section.label}>
+            {renderNavSection(section.label, section.items)}
+          </div>
+        ))}
+      </nav>
 
       <div className="sidebar-footer">
         <button type="button" onClick={logout}>Switch Persona</button>

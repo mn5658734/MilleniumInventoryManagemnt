@@ -12,6 +12,7 @@ export function AuthProvider({ children }) {
       role: persona.role,
       dept: persona.dept || null,
       modules: persona.modules,
+      excludedNavIds: persona.excludedNavIds || [],
     });
   };
 

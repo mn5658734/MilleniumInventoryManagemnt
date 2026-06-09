@@ -1,3 +1,53 @@
+export const revenueTrend = [
+  { month: 'Jan', value: 8.2 },
+  { month: 'Feb', value: 9.5 },
+  { month: 'Mar', value: 11.0 },
+  { month: 'Apr', value: 12.8 },
+  { month: 'May', value: 14.1 },
+  { month: 'Jun', value: 15.8 },
+];
+
+export const orderVolume = [
+  { month: 'Jan', orders: 820 },
+  { month: 'Feb', orders: 940 },
+  { month: 'Mar', orders: 1050 },
+  { month: 'Apr', orders: 1180 },
+  { month: 'May', orders: 1240 },
+  { month: 'Jun', orders: 1247 },
+];
+
+export const revenueMix = [
+  { label: 'Marketplace', value: 70, color: '#06b6d4' },
+  { label: 'Aggregator', value: 20, color: '#6366f1' },
+  { label: 'Services', value: 10, color: '#10b981' },
+];
+
+export const categoryPerformance = [
+  { category: 'Evaluation Boards', revenue: 14.2, share: 33 },
+  { category: 'Passive Components', revenue: 11.8, share: 28 },
+  { category: 'Commodity Components', revenue: 9.6, share: 22 },
+  { category: 'Sample/Starter Kits', revenue: 7.2, share: 17 },
+];
+
+export const inventoryStatus = [
+  { label: 'In Stock', value: 68, color: '#10b981' },
+  { label: 'Surplus', value: 22, color: '#f59e0b' },
+  { label: 'Liquidation', value: 10, color: '#ef4444' },
+];
+
+export const customerActivation = {
+  current: 2184,
+  target: 3000,
+  monthly: [
+    { month: 'Jan', count: 1420 },
+    { month: 'Feb', count: 1580 },
+    { month: 'Mar', count: 1720 },
+    { month: 'Apr', count: 1890 },
+    { month: 'May', count: 2050 },
+    { month: 'Jun', count: 2184 },
+  ],
+};
+
 export const kpiMetrics = [
   { label: 'Revenue (YTD)', value: '₹42.8 Cr', change: '+18.4%', trend: 'up', target: '₹150 Cr' },
   { label: 'Active Orders', value: '1,247', change: '+12%', trend: 'up', target: '—' },
