@@ -28,9 +28,9 @@ export default function Landing() {
           MVP Phase · FY 2026-2031 Roadmap
         </div>
         <h1>
-          <span>Millennium Digital</span>
+          <span>Semiconductor</span>
           <br />
-          Semiconductor Import & Supply Platform
+          Inventory Management Platform
         </h1>
         <p>
           B2B commerce platform for Millennium Semiconductors — marketplace, aggregator,

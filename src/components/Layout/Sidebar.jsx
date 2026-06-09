@@ -3,7 +3,7 @@ import {
   LayoutDashboard, Boxes, Truck, FileText, Shield, Network, Plug, Bell,
 } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
-import { getNavSections, getNavDescription, roleLabels } from '../../data/navigation';
+import { getNavSections, getNavLabel, getNavDescription, roleLabels } from '../../data/navigation';
 
 const iconMap = {
   LayoutDashboard, Boxes, Truck, FileText, Shield, Network, Plug, Bell,
@@ -38,7 +38,7 @@ export default function Sidebar() {
             >
               <span className="nav-item-icon"><Icon size={18} /></span>
               <span className="nav-item-text">
-                <span className="nav-item-label">{item.label}</span>
+                <span className="nav-item-label">{getNavLabel(item, currentUser?.id)}</span>
                 <span className="nav-item-desc">{getNavDescription(item, currentUser?.id)}</span>
               </span>
             </NavLink>
@@ -72,7 +72,7 @@ export default function Sidebar() {
       </nav>
 
       <div className="sidebar-footer">
-        <button type="button" onClick={logout}>Switch Persona</button>
+        <button type="button" onClick={goToLanding}>Switch Persona</button>
       </div>
     </aside>
   );

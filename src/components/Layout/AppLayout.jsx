@@ -1,12 +1,13 @@
 import { Outlet, useLocation } from 'react-router-dom';
 import Sidebar from './Sidebar';
 import Header from './Header';
-import { navItems } from '../../data/navigation';
+import { getHeaderTitle } from '../../data/navigation';
+import { useAuth } from '../../context/AuthContext';
 
 export default function AppLayout() {
   const location = useLocation();
-  const currentNav = navItems.find((n) => n.path === location.pathname);
-  const title = currentNav?.label || 'Millennium Digital';
+  const { currentUser } = useAuth();
+  const title = getHeaderTitle(location.pathname, currentUser?.id);
 
   return (
     <div className="app-layout">

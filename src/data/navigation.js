@@ -1,3 +1,5 @@
+import { personaMenuConfig } from './personaMenus';
+
 export const navItems = [
   {
     id: 'dashboard',
@@ -74,14 +76,6 @@ export const roleLabels = {
 
 const navById = Object.fromEntries(navItems.map((item) => [item.id, item]));
 
-const personaNavOverrides = {
-  'b2b-buyer': {
-    dashboard: 'Your orders, reorders, and account activity',
-    orders: 'Place orders, track RFQs, and manage reorders',
-    notifications: 'Order updates, shipment alerts, and quote notifications',
-  },
-};
-
 export function getNavForPersona(modules = [], excludedNavIds = []) {
   const moduleSet = new Set(modules);
   const excluded = new Set(excludedNavIds);
@@ -93,8 +87,18 @@ export function getNavForPersona(modules = [], excludedNavIds = []) {
   );
 }
 
+function getPersonaConfig(personaId) {
+  return personaMenuConfig[personaId] || null;
+}
+
+export function getNavLabel(item, personaId) {
+  const config = getPersonaConfig(personaId);
+  return config?.labels?.[item.id] || item.label;
+}
+
 export function getNavDescription(item, personaId) {
-  return personaNavOverrides[personaId]?.[item.id] || item.description;
+  const config = getPersonaConfig(personaId);
+  return config?.descriptions?.[item.id] || item.description;
 }
 
 export function canAccessNav(navId, modules = [], excludedNavIds = []) {
@@ -103,25 +107,46 @@ export function canAccessNav(navId, modules = [], excludedNavIds = []) {
 }
 
 export function getNavSections(modules = [], personaId = null, excludedNavIds = []) {
-  const visible = getNavForPersona(modules, excludedNavIds);
+  const allowed = getNavForPersona(modules, excludedNavIds);
+  const allowedMap = Object.fromEntries(allowed.map((item) => [item.id, item]));
+  const allowedIds = new Set(allowed.map((item) => item.id));
+
+  const config = getPersonaConfig(personaId);
+  if (config?.sections) {
+    const sections = config.sections
+      .map((section) => ({
+        label: section.label,
+        items: section.navIds
+          .filter((id) => allowedIds.has(id))
+          .map((id) => allowedMap[id]),
+      }))
+      .filter((section) => section.items.length > 0);
+
+    if (sections.length) return sections;
+  }
+
   const opsIds = ['dashboard', 'orders', 'inventory', 'logistics'];
   const platformIds = ['iam', 'architecture', 'integrations'];
-
-  const operations = visible.filter((i) => opsIds.includes(i.id));
-  const platform = visible.filter((i) => platformIds.includes(i.id));
-  const intelligence = visible.filter((i) => i.id === 'notifications');
+  const operations = allowed.filter((i) => opsIds.includes(i.id));
+  const platform = allowed.filter((i) => platformIds.includes(i.id));
+  const intelligence = allowed.filter((i) => i.id === 'notifications');
 
   const sections = [];
-  const opsLabel = personaId === 'b2b-buyer' ? 'My Account' : 'Operations';
-  if (operations.length) sections.push({ label: opsLabel, items: operations });
+  if (operations.length) sections.push({ label: 'Operations', items: operations });
   if (platform.length) sections.push({ label: 'Platform', items: platform });
   if (intelligence.length) sections.push({ label: 'Intelligence', items: intelligence });
 
-  return sections.length ? sections : [{ label: 'My Workspace', items: visible }];
+  return sections.length ? sections : [{ label: 'My Workspace', items: allowed }];
 }
 
 export function getNavItemByPath(path) {
   return navItems.find((item) => item.path === path);
+}
+
+export function getHeaderTitle(path, personaId) {
+  const item = getNavItemByPath(path);
+  if (!item) return 'Millennium Digital';
+  return getNavLabel(item, personaId);
 }
 
 export { navById };
