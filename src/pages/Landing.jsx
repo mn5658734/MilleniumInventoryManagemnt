@@ -5,6 +5,7 @@ import {
 } from 'lucide-react';
 import { personas } from '../data/personas';
 import { useAuth } from '../context/AuthContext';
+import PoweredBy from '../components/PoweredBy';
 
 const iconMap = {
   Crown, ClipboardList, Package, TrendingUp, IndianRupee, Warehouse,
@@ -92,6 +93,10 @@ export default function Landing() {
           })}
         </div>
       </section>
+
+      <footer className="landing-footer">
+        <PoweredBy />
+      </footer>
     </div>
   );
 }

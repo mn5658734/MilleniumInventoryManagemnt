@@ -4,6 +4,7 @@ import {
 } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 import { getNavSections, getNavLabel, getNavDescription, roleLabels } from '../../data/navigation';
+import PoweredBy from '../PoweredBy';
 
 const iconMap = {
   LayoutDashboard, Boxes, Truck, FileText, Shield, Network, Plug, Bell,
@@ -72,6 +73,7 @@ export default function Sidebar() {
       </nav>
 
       <div className="sidebar-footer">
+        <PoweredBy variant="sidebar" />
         <button type="button" onClick={goToLanding}>Switch Persona</button>
       </div>
     </aside>
