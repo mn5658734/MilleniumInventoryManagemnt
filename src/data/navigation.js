@@ -1,0 +1,72 @@
+export const navItems = [
+  {
+    id: 'dashboard',
+    label: 'Dashboard',
+    path: '/app/dashboard',
+    icon: 'LayoutDashboard',
+    roles: ['admin', 'dept_head', 'user'],
+    description: 'Revenue, orders, inventory turnover, customer activation KPIs',
+  },
+  {
+    id: 'inventory',
+    label: 'Inventory Management',
+    path: '/app/inventory',
+    icon: 'Boxes',
+    roles: ['admin', 'dept_head', 'user'],
+    description: 'SKU master, stock sync, surplus monetisation, ageing stock',
+  },
+  {
+    id: 'logistics',
+    label: 'Logistics Management',
+    path: '/app/logistics',
+    icon: 'Truck',
+    roles: ['admin', 'dept_head'],
+    description: 'Shipment tracking, dispatch, carrier integration, delivery SLA',
+  },
+  {
+    id: 'orders',
+    label: 'Order Management',
+    path: '/app/orders',
+    icon: 'FileText',
+    roles: ['admin', 'dept_head', 'user'],
+    description: 'Order lifecycle, RFQ, quotes, returns/RMA, split shipments',
+  },
+  {
+    id: 'iam',
+    label: 'IAM & RBAC',
+    path: '/app/iam',
+    icon: 'Shield',
+    roles: ['admin'],
+    description: 'Role-based access, maker-checker approvals, audit trail',
+  },
+  {
+    id: 'architecture',
+    label: 'Technical Architecture',
+    path: '/app/architecture',
+    icon: 'Network',
+    roles: ['admin', 'dept_head'],
+    description: 'Platform architecture, integration model, security design',
+  },
+  {
+    id: 'integrations',
+    label: 'SAP & Salesforce Integration',
+    path: '/app/integrations',
+    icon: 'Plug',
+    roles: ['admin', 'dept_head'],
+    description: 'ERP stock sync, CRM lifecycle events, reconciliation',
+  },
+  {
+    id: 'notifications',
+    label: 'Notifications & Predictive Analysis',
+    path: '/app/notifications',
+    icon: 'Bell',
+    roles: ['admin', 'dept_head', 'user'],
+    description: 'Alerts, demand forecasting, pricing intelligence, surplus predictions',
+  },
+];
+
+export const roleLabels = {
+  admin: 'Administrator',
+  dept_head: 'Department Head',
+  user: 'Standard User',
+};
