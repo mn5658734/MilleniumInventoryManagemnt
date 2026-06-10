@@ -2,6 +2,7 @@ import { Bell } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import { canAccessNav } from '../../data/navigation';
+import DevonLogo from '../DevonLogo';
 
 export default function Header({ title }) {
   const navigate = useNavigate();
@@ -14,7 +15,10 @@ export default function Header({ title }) {
 
   return (
     <header className="header">
-      <h1 className="header-title">{title}</h1>
+      <div className="header-left">
+        <DevonLogo variant="header" />
+        <h1 className="header-title">{title}</h1>
+      </div>
       <div className="header-actions">
         {showNotifications && (
           <button

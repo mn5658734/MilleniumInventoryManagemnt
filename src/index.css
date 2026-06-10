@@ -241,6 +241,35 @@ button {
   overflow-y: auto;
 }
 
+.sidebar-logo-wrap {
+  padding: 1rem 1.25rem 0.75rem;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg-secondary);
+}
+
+.devon-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.devon-logo--sidebar {
+  padding: 0.25rem 0;
+}
+
+.devon-logo--sidebar .devon-logo__img {
+  width: 100%;
+  max-width: 220px;
+  height: auto;
+  display: block;
+}
+
+.devon-logo--header .devon-logo__img {
+  height: 36px;
+  width: auto;
+  display: block;
+}
+
 .sidebar-brand {
   display: block;
   width: 100%;
@@ -400,11 +429,23 @@ button {
   justify-content: space-between;
   padding: 0 1.5rem;
   flex-shrink: 0;
+  gap: 1rem;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  min-width: 0;
+  flex: 1;
 }
 
 .header-title {
   font-size: 1.1rem;
   font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .header-actions {
@@ -1114,4 +1155,6 @@ button {
   .chart-grid { grid-template-columns: 1fr; }
   .h-bar-row { grid-template-columns: 1fr; gap: 0.35rem; }
   .h-bar-value { text-align: left; }
+  .devon-logo--header .devon-logo__img { height: 28px; }
+  .header-title { font-size: 0.95rem; }
 }
