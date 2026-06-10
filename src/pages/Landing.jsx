@@ -24,16 +24,11 @@ export default function Landing() {
 
   return (
     <div className="landing">
-      <header className="landing-top">
-        <div className="landing-top-inner">
-          <DevonLogo variant="landing-bar" />
-        </div>
-      </header>
+      <div className="landing-logo-corner">
+        <DevonLogo variant="landing-corner" />
+      </div>
 
       <section className="landing-hero">
-        <div className="landing-logo-showcase">
-          <DevonLogo variant="landing-hero" />
-        </div>
         <div className="landing-badge">
           <Cpu size={14} />
           MVP Phase · FY 2026-2031 Roadmap
