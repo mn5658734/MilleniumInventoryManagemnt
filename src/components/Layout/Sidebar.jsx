@@ -5,7 +5,6 @@ import {
 import { useAuth } from '../../context/AuthContext';
 import { getNavSections, getNavLabel, getNavDescription, roleLabels } from '../../data/navigation';
 import PoweredBy from '../PoweredBy';
-import DevonLogo from '../DevonLogo';
 
 const iconMap = {
   LayoutDashboard, Boxes, Truck, FileText, Shield, Network, Plug, Bell,
@@ -52,13 +51,9 @@ export default function Sidebar() {
 
   return (
     <aside className="sidebar">
-      <div className="sidebar-logo-wrap">
-        <DevonLogo variant="sidebar" />
-      </div>
-
       <button type="button" className="sidebar-brand" onClick={goToLanding} aria-label="Go to landing page">
-        <h1>Millennium Digital</h1>
-        <p>Semiconductor Supply Platform</p>
+        <h1>Semiconductor Inventory</h1>
+        <p>Management Platform</p>
       </button>
 
       <div className="sidebar-user">

@@ -260,8 +260,43 @@ button {
 /* App Layout */
 .app-layout {
   display: flex;
+  flex-direction: column;
   height: 100vh;
   overflow: hidden;
+}
+
+.app-body {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.app-topbar {
+  height: 56px;
+  display: flex;
+  align-items: center;
+  padding: 0 1.25rem;
+  border-bottom: 1px solid var(--border);
+  background: linear-gradient(180deg, #111827 0%, #0f1623 100%);
+  flex-shrink: 0;
+  gap: 1rem;
+}
+
+.app-topbar-logo {
+  display: flex;
+  align-items: center;
+  padding: 0.35rem 0.5rem;
+  border-radius: var(--radius-sm);
+  transition: background 0.15s, opacity 0.15s;
+}
+
+.app-topbar-logo:hover {
+  background: var(--bg-hover);
+  opacity: 0.95;
+}
+
+.app-topbar-spacer {
+  flex: 1;
 }
 
 .sidebar {
@@ -275,15 +310,24 @@ button {
 }
 
 .sidebar-logo-wrap {
-  padding: 1rem 1.25rem 0.75rem;
-  border-bottom: 1px solid var(--border);
-  background: var(--bg-secondary);
+  display: none;
 }
 
 .devon-logo {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.devon-logo--corner {
+  justify-content: flex-start;
+}
+
+.devon-logo--corner .devon-logo__img {
+  height: 44px;
+  width: auto;
+  display: block;
+  object-fit: contain;
 }
 
 .devon-logo--sidebar {
@@ -478,23 +522,13 @@ button {
 }
 
 .header {
-  height: var(--header-height);
+  height: 52px;
   background: var(--bg-secondary);
   border-bottom: 1px solid var(--border);
   display: flex;
   align-items: center;
-  justify-content: space-between;
   padding: 0 1.5rem;
   flex-shrink: 0;
-  gap: 1rem;
-}
-
-.header-left {
-  display: flex;
-  align-items: center;
-  gap: 1.25rem;
-  min-width: 0;
-  flex: 1;
 }
 
 .header-title {
@@ -1207,12 +1241,13 @@ button {
 
 @media (max-width: 768px) {
   .app-layout { flex-direction: column; }
+  .app-body { flex-direction: column; }
   .sidebar { width: 100%; max-height: 40vh; }
   .grid-2 { grid-template-columns: 1fr; }
   .chart-grid { grid-template-columns: 1fr; }
   .h-bar-row { grid-template-columns: 1fr; gap: 0.35rem; }
   .h-bar-value { text-align: left; }
-  .devon-logo--header .devon-logo__img { height: 28px; }
+  .devon-logo--corner .devon-logo__img { height: 34px; }
   .devon-logo--landing-bar .devon-logo__img { height: 32px; }
   .devon-logo--landing-hero {
     padding: 1rem 1.25rem;
